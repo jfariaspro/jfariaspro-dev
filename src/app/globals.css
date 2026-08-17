@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* Regla 60-30-10 */
+  /* 60% Dominante */
+  --bg-blanco: #FFFFFF;
+  /* 30% Secundario */
+  --bg-gris: #E8E8E8;
+  /* 10% Acentos */
+  --texto-oscuro: #212121;
+  --texto-claro: #282828;
+}
+
+.dark {
+  --bg-blanco: #121212;
+  --bg-gris: #1E1E1E;
+  --texto-oscuro: #F5F5F5;
+  --texto-claro: #E0E0E0;
+}
+
+@theme inline {
+  --color-bg-blanco: var(--bg-blanco);
+  --color-bg-gris: var(--bg-gris);
+  --color-texto-oscuro: var(--texto-oscuro);
+  --color-texto-claro: var(--texto-claro);
+  
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background-color: var(--bg-blanco);
+  color: var(--texto-claro);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  /* El suavizado de fuentes ayuda al aspecto premium */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 
+  Utilidad CSS Pura para Glassprint 
+  (También se puede usar las clases de Tailwind: bg-white/70 backdrop-blur-md)
+*/
+.glassprint {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Animaciones sutiles personalizadas */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-30px) rotate(5deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes float-reverse {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(30px) rotate(-5deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.animate-float {
+  animation: float 8s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: float-reverse 10s ease-in-out infinite;
+}
+
+/* Animación para la Cinta de Colaboradores (Marquee) */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
