@@ -1,0 +1,159 @@
+{
+  "$schema": "https://synapsync.dev/schemas/cognitive-manifest.json",
+  "name": "project-brain",
+  "type": "skill",
+  "version": "2.9.0",
+  "description": "Session memory for AI agents — load context, save sessions, evolve knowledge",
+  "author": {
+    "name": "SynapSync",
+    "url": "https://github.com/SynapSync",
+    "email": "hello@synapsync.dev"
+  },
+  "license": "Apache-2.0",
+  "category": "workflow",
+  "tags": [
+    "context-restoration",
+    "session-memory",
+    "brain",
+    "save",
+    "incremental",
+    "continuity",
+    "markdown",
+    "context-persistence"
+  ],
+  "providers": [
+    "claude",
+    "openai",
+    "cursor",
+    "windsurf",
+    "copilot",
+    "gemini",
+    "codex"
+  ],
+  "file": "SKILL.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SynapSync/skills-registry"
+  },
+  "homepage": "https://synapsync.dev/cognitives/project-brain",
+  "changelog": [
+    {
+      "version": "2.9.0",
+      "date": "2026-03-22",
+      "changes": [
+        "Replace {project-name} with {scope} in Configuration Resolution and brain-config/brain-resolve defaults — scope represents the work topic, not the repo name"
+      ]
+    },
+    {
+      "version": "2.8.0",
+      "date": "2026-03-04",
+      "changes": [
+        "Remove MCP guardrail from obsidian integration table — obsidian skill is now filesystem-only",
+        "Update LOAD.md: replace ToolSearch+mcp__obsidian__read_note with filesystem Read for Obsidian vault paths",
+        "Capabilities Matrix: rename 'Read brain from Obsidian MCP' to 'Read brain from Obsidian vault'"
+      ]
+    },
+    {
+      "version": "2.7.0",
+      "date": "2026-02-21",
+      "changes": [
+        "Strengthened mandatory user prompt for brain_dir resolution — agents can no longer silently choose the default path",
+        "Added RULE 7 (NO SILENT DEFAULTS) to Critical Rules",
+        "brain-config.md Step 2 marked as MANDATORY with explicit warning block",
+        "SAVE.md Step 0 includes AskUserQuestion enforcement note"
+      ]
+    },
+    {
+      "version": "2.6.0",
+      "date": "2026-02-21",
+      "changes": [
+        "Updated Integration table with explicit obsidian skill invocation and MCP guardrail"
+      ]
+    },
+    {
+      "version": "2.5.0",
+      "date": "2026-02-20",
+      "changes": [
+        "New brain-resolve.md helper — lightweight resolution for LOAD (~170 tokens vs ~1,570)",
+        "LOAD no longer reads brain-config.md — saves ~1,400 tokens per invocation",
+        "Trimmed brain-config.md — removed duplicate block template, block rules, and variable usage sections",
+        "Asset Loading table updated with brain-resolve.md for LOAD mode"
+      ]
+    },
+    {
+      "version": "2.4.0",
+      "date": "2026-02-20",
+      "changes": [
+        "Mode-gated lazy asset loading — agents only read assets for the active mode",
+        "New Asset Loading (Mode-Gated) section with explicit Do NOT Read column",
+        "Quick Start uses imperative 'Assets to read now' instead of passive references",
+        "Removed changelog from SKILL.md frontmatter (canonical source: manifest.json)",
+        "Removed Version History section from SKILL.md body"
+      ]
+    },
+    {
+      "version": "2.3.0",
+      "date": "2026-02-19",
+      "changes": [
+        "Branded AGENTS.md block format with <!-- synapsync-skills:start/end --> delimiters",
+        "Single Configuration table where any skill can add its config keys",
+        "Visible rendered markdown table (replaces hidden HTML comment)"
+      ]
+    },
+    {
+      "version": "2.2.0",
+      "date": "2026-02-19",
+      "changes": [
+        "Configurable brain directory via AGENTS.md config block",
+        "New {brain_dir} variable resolved from <!-- synapsync:config --> in AGENTS.md",
+        "Backward-compatible auto-discovery fallback when no config exists",
+        "Custom SAVE paths now persist and are found by subsequent LOADs",
+        "New brain-config.md helper for shared resolution algorithm",
+        "LOAD and SAVE modes gain Step 0 for directory resolution"
+      ]
+    },
+    {
+      "version": "2.1.0",
+      "date": "2026-02-19",
+      "changes": [
+        "Pre-write backup (.bak) before merge in SAVE UPDATE mode",
+        "Explicit brain-format marker in template and LOAD parsing",
+        "Session ID (SID) for idempotent saves with duplicate detection",
+        "Semantic duplicate detection replaces >80% overlap heuristic",
+        "Markdown-aware section splitting (respects code fences)",
+        "Session Log compaction archives full entries before summarizing",
+        "Key Files staleness check verifies files still exist during merge",
+        "Accumulated Context contradiction check with retirement flow",
+        "Session Retrospective section for process reflection (friction, pivots, time sinks)",
+        "Next Steps anti-fabrication guard — only explicitly discussed items",
+        "Language separation — conversation in user's language, brain document always in English"
+      ]
+    },
+    {
+      "version": "2.0.0",
+      "date": "2026-02-19",
+      "changes": [
+        "Added SAVE mode with INIT and UPDATE sub-modes",
+        "Auto-discovery of brain documents in .agents/project-brain/",
+        "Standard brain document format (BRAIN-DOCUMENT template)",
+        "Incremental merge algorithm for non-destructive updates",
+        "Session Log with newest-first ordering and compaction",
+        "Backward-compatible parsing: v2.0, v1.0, and free-form",
+        "Interactive path resolution",
+        "Modular assets architecture"
+      ]
+    },
+    {
+      "version": "1.0.0",
+      "date": "2026-02-18",
+      "changes": [
+        "Initial release — single LOAD mode",
+        "Obsidian MCP support with filesystem fallback",
+        "Format-agnostic parsing of standard and free-form brain documents",
+        "Integrates with sprint-forge REENTRY.md, universal-planner, and obsidian skill"
+      ]
+    }
+  ],
+  "createdAt": "2026-02-18T00:00:00Z",
+  "updatedAt": "2026-03-22T00:00:00Z"
+}
