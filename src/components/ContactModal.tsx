@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import { useForm } from '@formspree/react';
 import { countries } from '../utils/countries';
 
 interface ContactModalProps {
@@ -27,8 +28,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     message: '' 
   });
   
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [state, handleSubmit] = useForm('meajrdgp');
 
   useEffect(() => {
     if (isOpen) {
@@ -38,6 +38,17 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     }
     return () => { document.body.style.overflow = 'unset'; };
   }, [isOpen]);
+
+  // Cierra el modal automáticamente 3 segundos después de éxito
+  useEffect(() => {
+    if (state.succeeded) {
+      setFormData({ firstName: '', lastName: '', email: '', countryCode: '+58', phone: '', subject: '', message: '' });
+      const timer = setTimeout(() => {
+        onClose();
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [state.succeeded, onClose]);
 
   const validate = () => {
     const tempErrors = { firstName: '', lastName: '', email: '', phone: '', subject: '', message: '' };
@@ -63,19 +74,10 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     return isValid;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (validate()) {
-      setIsSubmitting(true);
-      setTimeout(() => {
-        setIsSubmitting(false);
-        setIsSuccess(true);
-        setFormData({ firstName: '', lastName: '', email: '', countryCode: '+58', phone: '', subject: '', message: '' });
-        setTimeout(() => {
-          setIsSuccess(false);
-          onClose();
-        }, 3000);
-      }, 1500);
+      await handleSubmit(e);
     }
   };
 
@@ -117,7 +119,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         <h3 className="text-3xl font-extrabold text-texto-oscuro mb-1 tracking-tight">Ponte en contacto</h3>
         <p className="text-texto-claro/90 mb-8 text-sm font-medium">Completa el formulario y te responderé lo antes posible.</p>
 
-        {isSuccess ? (
+        {state.succeeded ? (
           <div className="bg-green-50 text-green-700 p-8 rounded-2xl flex flex-col items-center justify-center gap-4 border border-green-200 text-center h-64 animate-in fade-in zoom-in duration-300">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
             <div>
@@ -126,7 +128,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
             </div>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={onSubmit} className="space-y-5">
             <div className="grid grid-cols-2 gap-4">
               <div className={`${inputContainerClass} ${errors.firstName ? 'border-red-500 ring-1 ring-red-500' : 'border-bg-gris focus-within:border-texto-oscuro focus-within:ring-1 focus-within:ring-texto-oscuro'}`}>
                 <input type="text" id="firstName" name="firstName" maxLength={40} value={formData.firstName} onChange={handleChange} className={inputClass} placeholder="Nombre" />
@@ -184,8 +186,8 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
               </div>
             </div>
 
-            <button type="submit" disabled={isSubmitting} className={`w-full py-4 bg-texto-oscuro text-bg-blanco font-extrabold text-lg rounded-xl hover:bg-texto-claro transition-all shadow-lg flex items-center justify-center gap-2 mt-4 ${isSubmitting ? 'opacity-70 cursor-wait' : 'hover:scale-[1.02]'}`}>
-              {isSubmitting ? (
+            <button type="submit" disabled={state.submitting} className={`w-full py-4 bg-texto-oscuro text-bg-blanco font-extrabold text-lg rounded-xl hover:bg-texto-claro transition-all shadow-lg flex items-center justify-center gap-2 mt-4 ${state.submitting ? 'opacity-70 cursor-wait' : 'hover:scale-[1.02]'}`}>
+              {state.submitting ? (
                 <><svg className="animate-spin h-5 w-5 text-bg-blanco" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Enviando...</>
               ) : 'Enviar mensaje'}
             </button>
