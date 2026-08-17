@@ -84,8 +84,13 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     
-    // Si es teléfono, solo permitir números y espacios
-    if (name === 'phone' && value !== '' && !/^[0-9\s]*$/.test(value)) {
+    // Si es teléfono, solo permitir números EXACTOS (sin espacios) según estándar internacional E.164
+    if (name === 'phone' && value !== '' && !/^[0-9]*$/.test(value)) {
+      return;
+    }
+
+    // Si es nombre o apellido, solo permitir letras (incluyendo acentos) SIN ESPACIOS ni caracteres especiales
+    if ((name === 'firstName' || name === 'lastName') && value !== '' && !/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ]*$/.test(value)) {
       return;
     }
     
@@ -162,7 +167,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   </div>
                 </div>
                 <div className="relative w-full">
-                  <input type="tel" id="phone" name="phone" maxLength={15} value={formData.phone} onChange={handleChange} className={inputClass} placeholder="Teléfono" />
+                  <input type="tel" id="phone" name="phone" maxLength={14} value={formData.phone} onChange={handleChange} className={inputClass} placeholder="Teléfono" />
                   <label htmlFor="phone" className={`${labelClass} ${getLabelDynamicClass(formData.phone)} ${errors.phone ? 'text-red-500 peer-focus:text-red-500' : ''}`}>Teléfono</label>
                   {errors.phone && <span className="absolute -bottom-5 right-1 text-[10px] text-red-500 font-bold">{errors.phone}</span>}
                 </div>
