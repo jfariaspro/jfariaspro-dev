@@ -2,13 +2,29 @@ import { Project } from '../types/project';
 
 export const projectsData: Project[] = [
   {
-    id: "la-imaginaria",
-    title: "Plataforma SaaS de Loterías (La Imaginaria)",
-    elevatorPitch: "Diseño y despliegue del sitio corporativo y sistema administrativo en Google Cloud. Creación de puente de impresión fiscal en Go.",
-    fullDescription: "Diseño y despliegue del sitio corporativo y sistema administrativo en Google Cloud. Creación de puente de impresión fiscal en Go.",
-    tags: ["Google Cloud", "Go", "React", "CI/CD"],
-    images: [],
-    colorPlaceholder: "bg-blue-100"
+    id: "r4-conecta-api",
+    title: "R4 Conecta API - Middleware de Integración Bancaria",
+    role: "Desarrollador Backend / Integrador de Sistemas",
+    deployment: "Google Cloud Platform (GCP) utilizando Docker / Cloud Run",
+    elevatorPitch: "R4 Conecta API es una robusta capa de integración (middleware) construida desde cero para conectar sistemas externos con la infraestructura bancaria oficial de R4 Conecta (v3.0). El sistema actúa como un puente seguro y eficiente para procesar operaciones financieras críticas como pagos móviles (C2P), domiciliaciones y consultas de tasas del BCV.",
+    fullDescription: "R4 Conecta API es una robusta capa de integración (middleware) construida desde cero para conectar sistemas externos con la infraestructura bancaria oficial de R4 Conecta (v3.0). El sistema actúa como un puente seguro y eficiente para procesar operaciones financieras críticas como pagos móviles (C2P), domiciliaciones, créditos/débitos inmediatos y consultas de tasas del BCV. Diseñada bajo principios de Arquitectura Limpia, la API está contenerizada para un despliegue escalable en GCP, garantizando la integridad y seguridad de cada transacción mediante firmas criptográficas (HMAC-SHA256), un sistema de licenciamiento propietario y validación estricta de datos, al tiempo que proporciona su propia interfaz web para documentación técnica interactiva.",
+    tags: ["Node.js", "TypeScript", "Express.js", "GCP", "Docker", "Zod", "EJS", "HMAC-SHA256"],
+    features: [
+      "Seguridad Bancaria y Licenciamiento: Implementación de un sistema de licencias propietario mediante hashes encriptados dependientes de fechas. Autenticación de cada petición con firmas HMAC-SHA256, validación de IPs (Whitelist) para Webhooks/Notificaciones bancarias y protección Rate Limiting.",
+      "Motor de Operaciones Financieras: Endpoints estructurados para todo el ciclo de transacciones: cobros y anulaciones C2P, dispersión de pagos, débitos y créditos inmediatos (cuentas y números telefónicos), domiciliaciones y consultas automatizadas de la tasa oficial del BCV.",
+      "Arquitectura Limpia y Tipado Fuerte: Separación estricta de responsabilidades (Rutas, Controladores, Servicios). Uso intensivo de TypeScript y Zod para garantizar una validación de esquemas inviolable en tiempo de ejecución y un manejo centralizado de más de 60 códigos de error bancarios.",
+      "Portal de Documentación Web: Motor de plantillas EJS con Bootstrap integrado directamente en el servidor que despliega: manuales referenciales, documentación técnica con resaltado de sintaxis, colecciones listas para importar en Bruno API y un dashboard público para consultar la tasa BCV en tiempo real.",
+      "Despliegue Cloud Nativo (GCP): Arquitectura contenerizada mediante Docker, optimizada para integrarse con los pipelines de CI/CD de Google Cloud Build. Despliegue elástico y de alta disponibilidad preparado para entornos Serverless (Cloud Run), complementado con trazabilidad de eventos mediante logs estructurados con Winston."
+    ],
+    images: [
+      { src: "/projects/r4-conecta-api/0.jpg", alt: "R4 Conecta API - Plataforma Multipantalla" },
+      { src: "/projects/r4-conecta-api/1.jpg", alt: "R4 Conecta API - Dashboard Tasa BCV" },
+      { src: "/projects/r4-conecta-api/2.png", alt: "R4 Conecta API - Funcionalidades Integradas" },
+      { src: "/projects/r4-conecta-api/3.png", alt: "R4 Conecta API - Panel de Pagos Móviles (C2P)" },
+      { src: "/projects/r4-conecta-api/4.png", alt: "R4 Conecta API - Cobro e Interfaz C2P" },
+      { src: "/projects/r4-conecta-api/5.png", alt: "R4 Conecta API - Dispersión de Pagos" },
+      { src: "/projects/r4-conecta-api/6.png", alt: "R4 Conecta API - Gestión de Webhooks e IP Whitelist" }
+    ]
   },
   {
     id: "aipos",
@@ -34,23 +50,5 @@ export const projectsData: Project[] = [
       { src: "/projects/aipos/5.png", alt: "AIPOS KDS - Preparación" },
       { src: "/projects/aipos/6.png", alt: "AIPOS Interfaz de Cobro (POS)" }
     ]
-  },
-  {
-    id: "mrw",
-    title: "Sistema de Gestión Logística (MRW)",
-    elevatorPitch: "Desarrollo y mantenimiento evolutivo de sistemas críticos en operaciones logísticas. Diseño de bases de datos para nuevos módulos.",
-    fullDescription: "Desarrollo y mantenimiento evolutivo de sistemas críticos en operaciones logísticas. Diseño de bases de datos para nuevos módulos.",
-    tags: ["Laravel", "PHP", "PostgreSQL"],
-    images: [],
-    colorPlaceholder: "bg-gray-200"
-  },
-  {
-    id: "banco-mercantil",
-    title: "Monitoreo Bancario (Banco Mercantil)",
-    elevatorPitch: "Análisis crítico de errores y monitoreo de microservicios mediante SiteScope e Instana para mitigar impactos en la operatividad.",
-    fullDescription: "Análisis crítico de errores y monitoreo de microservicios mediante SiteScope e Instana para mitigar impactos en la operatividad.",
-    tags: ["SiteScope", "Kibana", "Infraestructura"],
-    images: [],
-    colorPlaceholder: "bg-purple-100"
   }
 ];
