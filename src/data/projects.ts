@@ -66,6 +66,7 @@ export const projectsData: Project[] = [
       "Herramientas Adicionales Integradas: Generación y exportación de reportes en PDF y capturas del estado de los proyectos en tiempo real (jsPDF y html2canvas).",
       "Asistencia IA Integrada: Implementación del SDK de Google Generative AI, con un agente especializado (devChat) como ingeniero de software para apoyar automatizadamente en la redacción o resumen de tareas del equipo."
     ],
+    link: "https://devspacio.dpana.com.ve/",
     images: [
       { src: "/projects/devspacio/0.jpg", alt: "devSpacio - Entorno y Autenticación" },
       { src: "/projects/devspacio/1.png", alt: "devChat - Asistente de IA Integrado" },
