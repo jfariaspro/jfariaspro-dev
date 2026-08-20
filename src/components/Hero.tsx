@@ -108,7 +108,7 @@ export default function Hero() {
           <a href="#proyectos" className="px-8 py-3 bg-bg-blanco text-texto-oscuro font-semibold rounded-md hover:bg-bg-gris transition-all shadow-lg hover:-translate-y-1">
             Ver proyectos
           </a>
-          <a href="/CV-Juan Farias.pdf" target="_blank" className="px-8 py-3 bg-transparent border-2 border-bg-blanco text-bg-blanco font-semibold rounded-md hover:bg-bg-blanco/10 transition-all hover:-translate-y-1">
+          <a href="/Juan Farias - Ing. Informatico - CV.pdf" target="_blank" className="px-8 py-3 bg-transparent border-2 border-bg-blanco text-bg-blanco font-semibold rounded-md hover:bg-bg-blanco/10 transition-all hover:-translate-y-1">
             Descargar CV
           </a>
         </div>
